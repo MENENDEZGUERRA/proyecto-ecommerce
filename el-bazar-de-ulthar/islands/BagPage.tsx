@@ -1,8 +1,7 @@
 // islands/BagPage.tsx
-import { useCart } from "../context/CartContext.tsx"; // Importación corregida
+import { useCart } from "../context/CartContext.tsx";
 import { Product } from "../types.ts";
 import { asset } from "$fresh/runtime.ts";
-
 
 export default function BagPage() {
   const { cart, updateQuantity, removeFromCart, clearCart } = useCart();

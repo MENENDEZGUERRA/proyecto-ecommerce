@@ -1,4 +1,3 @@
-// islands/CartProvider.tsx
 import { useSignal } from "@preact/signals";
 import { CartContext } from "../context/CartContext.tsx";
 import { CartItem } from "../context/CartContext.tsx";
@@ -13,21 +12,31 @@ export default function CartProvider({ children }: CartProviderProps) {
   const cart = useSignal<CartItem[]>([]);
 
   const addToCart = (product: Product, quantity: number) => {
+    // Clonar el array actual
     const currentCart = [...cart.value];
     const existingItemIndex = currentCart.findIndex(
       (item) => item.product.id === product.id
     );
     
     if (existingItemIndex !== -1) {
+      // Actualizar cantidad si el producto ya está en el carrito
       currentCart[existingItemIndex] = {
         ...currentCart[existingItemIndex],
         quantity: currentCart[existingItemIndex].quantity + quantity,
       };
     } else {
-      currentCart.push({ product, quantity });
+      // Añadir nuevo producto al carrito
+      currentCart.push({ 
+        product: { ...product }, // Crear copia para evitar mutaciones
+        quantity 
+      });
     }
     
+    // Actualizar la señal
     cart.value = currentCart;
+    
+    // Guardar en localStorage para persistencia
+    localStorage.setItem("cart", JSON.stringify(currentCart));
   };
 
   const updateQuantity = (productId: number, quantity: number) => {
@@ -39,15 +48,32 @@ export default function CartProvider({ children }: CartProviderProps) {
     cart.value = cart.value.map((item) =>
       item.product.id === productId ? { ...item, quantity } : item
     );
+    
+    // Actualizar localStorage
+    localStorage.setItem("cart", JSON.stringify(cart.value));
   };
 
   const removeFromCart = (productId: number) => {
     cart.value = cart.value.filter((item) => item.product.id !== productId);
+    localStorage.setItem("cart", JSON.stringify(cart.value));
   };
 
   const clearCart = () => {
     cart.value = [];
+    localStorage.removeItem("cart");
   };
+
+  // Cargar carrito desde localStorage al iniciar
+  if (typeof window !== "undefined" && !cart.value.length) {
+    const savedCart = localStorage.getItem("cart");
+    if (savedCart) {
+      try {
+        cart.value = JSON.parse(savedCart);
+      } catch (e) {
+        console.error("Error loading cart from localStorage:", e);
+      }
+    }
+  }
 
   // Crear objeto de contexto
   const contextValue = {
