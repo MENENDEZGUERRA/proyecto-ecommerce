@@ -1,0 +1,82 @@
+[
+    {
+      "id": 1,
+      "name": "Espejo Maldito",
+      "description": "Un espejo que muestra tu reflejo envejecido 10 años",
+      "price": 250.00,
+      "discountPercentage": 20,
+      "imageUrl": "/media/products/mirror.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Muñeca Embrujada",
+      "description": "Muñeca que cambia de posición durante la noche",
+      "price": 180.00,
+      "discountPercentage": 15,
+      "imageUrl": "/media/products/doll.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Libro de Hechizos",
+      "description": "Libro antiguo con hechizos prohibidos",
+      "price": 350.00,
+      "discountPercentage": 10,
+      "imageUrl": "/media/products/book.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Anillo de la Oscuridad",
+      "description": "Anillo que otorga invisibilidad a medianoche",
+      "price": 500.00,
+      "discountPercentage": 25,
+      "imageUrl": "/media/products/ring.jpg"
+    },
+    {
+      "id": 5,
+      "name": "Lámpara de Aladino Maldita",
+      "description": "Concede deseos con consecuencias impredecibles",
+      "price": 450.00,
+      "discountPercentage": 30,
+      "imageUrl": "/media/products/lamp.jpg"
+    },
+    {
+      "id": 6,
+      "name": "Collar de Vampiros",
+      "description": "Protege contra la luz del sol pero atrae vampiros",
+      "price": 300.00,
+      "discountPercentage": 0,
+      "imageUrl": "/media/products/necklace.jpg"
+    },
+    {
+      "id": 7,
+      "name": "Máscara Ritual",
+      "description": "Máscara usada en rituales ancestrales",
+      "price": 200.00,
+      "discountPercentage": 5,
+      "imageUrl": "/media/products/mask.jpg"
+    },
+    {
+      "id": 8,
+      "name": "Gárgola de Piedra",
+      "description": "Estatuilla que protege tu hogar pero atormenta tus sueños",
+      "price": 150.00,
+      "discountPercentage": 0,
+      "imageUrl": "/media/products/gargoyle.jpg"
+    },
+    {
+      "id": 9,
+      "name": "Reloj del Fin del Mundo",
+      "description": "Reloj que cuenta regresivamente hacia tu muerte",
+      "price": 600.00,
+      "discountPercentage": 40,
+      "imageUrl": "/media/products/clock.jpg"
+    },
+    {
+      "id": 10,
+      "name": "Tarot del Caos",
+      "description": "Cartas de tarot que predicen solo desgracias",
+      "price": 220.00,
+      "discountPercentage": 10,
+      "imageUrl": "/media/products/tarot.jpg"
+    }
+  ]
