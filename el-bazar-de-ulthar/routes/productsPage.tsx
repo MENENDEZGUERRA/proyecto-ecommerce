@@ -1,18 +1,11 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
 import Header from "../components/Header.tsx";
 import ProductCard from "../components/ProductCard.tsx";
-
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  discountPercentage: number;
-  imageUrl: string;
-}
+import SearchBar from "../islands/search-bar.tsx"; 
+import { Product } from "../types.ts";
 
 export const handler: Handlers<Product[] | null> = {
   async GET(_, ctx) {
-    // Leer datos del JSON
     const products: Product[] = JSON.parse(await Deno.readTextFile('./static/data/products.json'));
     return ctx.render(products);
   },
@@ -20,17 +13,25 @@ export const handler: Handlers<Product[] | null> = {
 
 export default function ProductsPage({ data }: PageProps<Product[] | null>) {
   if (!data) {
-    return <div>No products found</div>;
+    return (
+      <div>
+        <Header />
+        <div class="error-message">No se encontraron productos malditos...</div>
+      </div>
+    );
   }
 
   return (
     <>
       <Header />
-      <div class="products-container">
-        {data.map(product => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </div>
+      <main class="products-page">
+        <SearchBar products={data} />
+        <div class="products-container">
+          {data.map(product => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+      </main>
     </>
   );
 }
