@@ -1,0 +1,129 @@
+.product-detail {
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .product-container {
+    display: flex;
+    gap: 50px;
+    margin-top: 30px;
+  }
+  
+  .product-image-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  
+  .product-detail-image {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  .product-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .product-title {
+    font-family: 'Jolly Lodger', cursive;
+    color: #EEE;
+    font-size: 3rem;
+    margin: 0 0 20px 0;
+    letter-spacing: 1px;
+  }
+  
+  .product-description {
+    font-family: 'Roboto', sans-serif;
+    color: #CCC;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+  }
+  
+  .product-prices {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+  }
+  
+  .original-price {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2rem;
+    text-decoration: line-through;
+    color: #888;
+  }
+  
+  .discounted-price {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #8E1616;
+  }
+  
+  .quantity-selector {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    gap: 15px;
+  }
+  
+  .quantity-btn {
+    background-color: #8E1616;
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .quantity-btn:hover {
+    background-color: #D84040;
+  }
+  
+  .quantity-value {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5rem;
+    min-width: 50px;
+    text-align: center;
+  }
+  
+  .add-to-cart-btn {
+    background-color: #8E1616;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-family: 'Jolly Lodger', cursive;
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+    cursor: pointer;
+    border-radius: 30px;
+    transition: background-color 0.3s;
+    max-width: 300px;
+  }
+  
+  .add-to-cart-btn:hover {
+    background-color: #D84040;
+  }
+  
+  @media (max-width: 768px) {
+    .product-container {
+      flex-direction: column;
+      gap: 30px;
+    }
+    
+    .product-title {
+      font-size: 2.5rem;
+    }
+  }

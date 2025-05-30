@@ -1,5 +1,6 @@
 // routes/_app.tsx
 import { AppProps } from "$fresh/server.ts";
+import CartProvider from "../islands/CartProvider.tsx";
 
 export default function App({ Component }: AppProps) {
   return (
@@ -10,11 +11,15 @@ export default function App({ Component }: AppProps) {
         <link rel="stylesheet" href="/styles/Header.css" />
         <link rel="stylesheet" href="/styles/ProductCard.css" />
         <link rel="stylesheet" href="/styles/SearchBar.css" />
+        <link rel="stylesheet" href="/styles/ProductDetail.css" />
+        <link rel="stylesheet" href="/styles/BagPage.css" />
         <link rel="stylesheet" href="/styles/global.css" />
         <link href="https://fonts.googleapis.com/css2?family=Jolly+Lodger&family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
       </head>
       <body>
-        <Component />
+        <CartProvider>
+          <Component />
+        </CartProvider>
       </body>
     </html>
   );
