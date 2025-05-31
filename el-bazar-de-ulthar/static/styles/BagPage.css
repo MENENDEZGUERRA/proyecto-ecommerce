@@ -105,6 +105,12 @@
     margin-bottom: 15px;
   }
   
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
   .quantity-btn {
     background-color: #8E1616;
     border: none;
