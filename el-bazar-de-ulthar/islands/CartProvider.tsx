@@ -1,4 +1,5 @@
 import { useSignal } from "@preact/signals";
+import { useEffect } from "preact/hooks";
 import { CartContext } from "../context/CartContext.tsx";
 import { CartItem } from "../context/CartContext.tsx";
 import { Product } from "../types.ts";
@@ -11,31 +12,35 @@ interface CartProviderProps {
 export default function CartProvider({ children }: CartProviderProps) {
   const cart = useSignal<CartItem[]>([]);
 
+  // Load cart from localStorage only on client after mount
+  useEffect(() => {
+    const savedCart = localStorage.getItem("cart");
+    if (savedCart) {
+      try {
+        cart.value = JSON.parse(savedCart);
+      } catch (e) {
+        console.error("Error loading cart from localStorage:", e);
+      }
+    }
+  }, []);
+
   const addToCart = (product: Product, quantity: number) => {
-    // Clonar el array actual
     const currentCart = [...cart.value];
     const existingItemIndex = currentCart.findIndex(
       (item) => item.product.id === product.id
     );
-    
     if (existingItemIndex !== -1) {
-      // Actualizar cantidad si el producto ya está en el carrito
       currentCart[existingItemIndex] = {
         ...currentCart[existingItemIndex],
         quantity: currentCart[existingItemIndex].quantity + quantity,
       };
     } else {
-      // Añadir nuevo producto al carrito
-      currentCart.push({ 
-        product: { ...product }, // Crear copia para evitar mutaciones
-        quantity 
+      currentCart.push({
+        product: { ...product },
+        quantity,
       });
     }
-    
-    // Actualizar la señal
     cart.value = currentCart;
-    
-    // Guardar en localStorage para persistencia
     localStorage.setItem("cart", JSON.stringify(currentCart));
   };
 
@@ -44,12 +49,9 @@ export default function CartProvider({ children }: CartProviderProps) {
       removeFromCart(productId);
       return;
     }
-    
     cart.value = cart.value.map((item) =>
       item.product.id === productId ? { ...item, quantity } : item
     );
-    
-    // Actualizar localStorage
     localStorage.setItem("cart", JSON.stringify(cart.value));
   };
 
@@ -63,25 +65,12 @@ export default function CartProvider({ children }: CartProviderProps) {
     localStorage.removeItem("cart");
   };
 
-  // Cargar carrito desde localStorage al iniciar
-  if (typeof window !== "undefined" && !cart.value.length) {
-    const savedCart = localStorage.getItem("cart");
-    if (savedCart) {
-      try {
-        cart.value = JSON.parse(savedCart);
-      } catch (e) {
-        console.error("Error loading cart from localStorage:", e);
-      }
-    }
-  }
-
-  // Crear objeto de contexto
   const contextValue = {
     cart: cart.value,
     addToCart,
     updateQuantity,
     removeFromCart,
-    clearCart
+    clearCart,
   };
 
   return (

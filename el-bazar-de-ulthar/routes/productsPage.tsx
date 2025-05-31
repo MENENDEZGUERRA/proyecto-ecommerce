@@ -1,7 +1,7 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
 import Header from "../components/Header.tsx";
 import ProductCard from "../components/ProductCard.tsx";
-import SearchBar from "../islands/search-bar.tsx"; 
+
 import { Product } from "../types.ts";
 
 export const handler: Handlers<Product[] | null> = {
@@ -25,7 +25,6 @@ export default function ProductsPage({ data }: PageProps<Product[] | null>) {
     <>
       <Header />
       <main class="products-page">
-        <SearchBar products={data} />
         <div class="products-container">
           {data.map(product => (
             <ProductCard key={product.id} product={product} />

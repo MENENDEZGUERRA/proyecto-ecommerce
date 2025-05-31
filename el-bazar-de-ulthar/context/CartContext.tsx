@@ -1,6 +1,6 @@
-// context/CartContext.tsx
 import { createContext } from "preact";
 import { useContext } from "preact/hooks";
+import { Signal } from "@preact/signals";
 import { Product } from "../types.ts";
 
 export interface CartItem {
@@ -9,7 +9,7 @@ export interface CartItem {
 }
 
 export interface CartContextType {
-  cart: CartItem[];
+  cart: Signal<CartItem[]>;
   addToCart: (product: Product, quantity: number) => void;
   updateQuantity: (productId: number, quantity: number) => void;
   removeFromCart: (productId: number) => void;
@@ -18,7 +18,7 @@ export interface CartContextType {
 
 // Crear contexto con valor predeterminado
 export const CartContext = createContext<CartContextType>({
-  cart: [],
+  cart: { value: [] } as Signal<CartItem[]>,
   addToCart: () => {},
   updateQuantity: () => {},
   removeFromCart: () => {},

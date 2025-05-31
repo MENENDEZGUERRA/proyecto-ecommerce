@@ -10,7 +10,7 @@ export default function App({ Component }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="/styles/Header.css" />
         <link rel="stylesheet" href="/styles/ProductCard.css" />
-        <link rel="stylesheet" href="/styles/SearchBar.css" />
+
         <link rel="stylesheet" href="/styles/ProductDetail.css" />
         <link rel="stylesheet" href="/styles/BagPage.css" />
         <link rel="stylesheet" href="/styles/global.css" />
