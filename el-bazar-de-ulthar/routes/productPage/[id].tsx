@@ -3,7 +3,9 @@ import { Handlers, PageProps } from "$fresh/server.ts";
 import Header from "../../components/Header.tsx";
 import { Product } from "../../types.ts";
 import { asset } from "$fresh/runtime.ts";
-import AddToCart from "../../islands/AddToCart.tsx"; // Importa el nuevo island
+import AddToCart from "../../islands/AddToCart.tsx";
+import RecentlyViewed from "../../components/RecentlyViewed.tsx";
+import { useRecentlyViewed } from "../../context/RecentlyViewedContext.tsx";
 
 export const handler: Handlers<Product | null> = {
   async GET(_, ctx) {
@@ -15,6 +17,8 @@ export const handler: Handlers<Product | null> = {
 };
 
 export default function ProductPage({ data }: PageProps<Product | null>) {
+  const { addToRecentlyViewed } = useRecentlyViewed();
+  
   if (!data) {
     return (
       <div>
@@ -23,6 +27,9 @@ export default function ProductPage({ data }: PageProps<Product | null>) {
       </div>
     );
   }
+  
+  // Añadir producto a los recientemente vistos
+  addToRecentlyViewed(data);
 
   return (
     <>
@@ -39,10 +46,12 @@ export default function ProductPage({ data }: PageProps<Product | null>) {
           <div class="product-info">
             <h1 class="product-title">{data.name}</h1>
             <p class="product-description">{data.description}</p>
-            {/* Usa el island para la parte interactiva */}
             <AddToCart product={data} />
           </div>
         </div>
+        
+        {/* Componente de productos recientemente vistos */}
+        <RecentlyViewed />
       </main>
     </>
   );
