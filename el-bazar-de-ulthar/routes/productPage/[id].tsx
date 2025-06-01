@@ -9,7 +9,7 @@ import { useRecentlyViewed } from "../../context/RecentlyViewedContext.tsx";
 
 export const handler: Handlers<Product | null> = {
   async GET(_, ctx) {
-    const res = await fetch(`${ctx.url.origin}/data/products.json`);
+    const res = await fetch(`${ctx.url.origin}/api/products`);
     if (!res.ok) return ctx.render(null);
     // Forzar parseo manual
     const text = await res.text();

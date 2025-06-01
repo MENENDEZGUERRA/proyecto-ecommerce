@@ -6,7 +6,7 @@ import { Product } from "../types.ts";
 
 export const handler: Handlers<Product[] | null> = {
   async GET(_, ctx) {
-    const res = await fetch(`${ctx.url.origin}/data/products.json`);
+    const res = await fetch(`${ctx.url.origin}/api/products`);
     if (!res.ok) return ctx.render(null);
     // Forzar parseo manual por si el content-type es text/plain
     const text = await res.text();
