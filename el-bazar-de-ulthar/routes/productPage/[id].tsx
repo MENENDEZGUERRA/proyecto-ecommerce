@@ -6,38 +6,18 @@ import { asset } from "$fresh/runtime.ts";
 import AddToCart from "../../islands/AddToCart.tsx";
 import RecentlyViewed from "../../components/RecentlyViewed.tsx";
 import { useRecentlyViewed } from "../../context/RecentlyViewedContext.tsx";
+import { products } from "../api/products.ts";
 
 export const handler: Handlers<Product | null> = {
-  async GET(_, ctx) {
-    try {
-      const res = await fetch(`${ctx.url.origin}/api/products`);
-      const text = await res.text();
-      
-      if (!res.ok) {
-        console.error(`API responded with status ${res.status}: ${text}`);
-        return ctx.render(null);
-      }
-
-      let products: Product[];
-      try {
-        products = JSON.parse(text);
-      } catch (e) {
-        console.error("Failed to parse products:", e);
-        return ctx.render(null);
-      }
-
-      const productId = parseInt(ctx.params.id);
-      const product = products.find(p => p.id === productId);
-      
-      if (!product) {
-        console.error(`Product ${productId} not found`);
-      }
-      
-      return ctx.render(product || null);
-    } catch (error) {
-      console.error("Error in product page handler:", error);
-      return ctx.render(null);
+  async GET(_req, ctx) {
+    const productId = parseInt(ctx.params.id);
+    const product = products.find(p => p.id === productId);
+    
+    if (!product) {
+      console.error(`Product ${productId} not found`);
     }
+    
+    return ctx.render(product || null);
   },
 };
 
