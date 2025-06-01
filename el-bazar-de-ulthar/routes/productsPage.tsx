@@ -6,7 +6,10 @@ import { Product } from "../types.ts";
 
 export const handler: Handlers<Product[] | null> = {
   async GET(_, ctx) {
-    const products: Product[] = JSON.parse(await Deno.readTextFile('./static/data/products.json'));
+    // Cambia la ruta para Deno Deploy
+    const res = await fetch(`${ctx.url.origin}/data/products.json`);
+    if (!res.ok) return ctx.render(null);
+    const products: Product[] = await res.json();
     return ctx.render(products);
   },
 };

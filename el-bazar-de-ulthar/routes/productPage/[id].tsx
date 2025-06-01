@@ -9,8 +9,11 @@ import { useRecentlyViewed } from "../../context/RecentlyViewedContext.tsx";
 
 export const handler: Handlers<Product | null> = {
   async GET(_, ctx) {
+    // Cambia la ruta para Deno Deploy
+    const res = await fetch(`${ctx.url.origin}/data/products.json`);
+    if (!res.ok) return ctx.render(null);
+    const products: Product[] = await res.json();
     const productId = parseInt(ctx.params.id);
-    const products: Product[] = JSON.parse(await Deno.readTextFile('./static/data/products.json'));
     const product = products.find(p => p.id === productId);
     return ctx.render(product || null);
   },
