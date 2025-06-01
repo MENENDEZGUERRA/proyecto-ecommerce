@@ -6,17 +6,28 @@ import { Product } from "../types.ts";
 
 export const handler: Handlers<Product[] | null> = {
   async GET(_, ctx) {
-    const res = await fetch(`${ctx.url.origin}/api/products`);
-    if (!res.ok) return ctx.render(null);
-    // Forzar parseo manual por si el content-type es text/plain
-    const text = await res.text();
-    let products: Product[];
     try {
-      products = JSON.parse(text);
-    } catch {
+      const res = await fetch(`${ctx.url.origin}/api/products`);
+      const text = await res.text();
+      
+      if (!res.ok) {
+        console.error(`API responded with status ${res.status}: ${text}`);
+        return ctx.render(null);
+      }
+
+      let products: Product[];
+      try {
+        products = JSON.parse(text);
+      } catch (e) {
+        console.error("Failed to parse products:", e);
+        return ctx.render(null);
+      }
+
+      return ctx.render(products);
+    } catch (error) {
+      console.error("Error loading products:", error);
       return ctx.render(null);
     }
-    return ctx.render(products);
   },
 };
 

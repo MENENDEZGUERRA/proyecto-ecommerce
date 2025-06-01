@@ -9,19 +9,35 @@ import { useRecentlyViewed } from "../../context/RecentlyViewedContext.tsx";
 
 export const handler: Handlers<Product | null> = {
   async GET(_, ctx) {
-    const res = await fetch(`${ctx.url.origin}/api/products`);
-    if (!res.ok) return ctx.render(null);
-    // Forzar parseo manual
-    const text = await res.text();
-    let products: Product[];
     try {
-      products = JSON.parse(text);
-    } catch {
+      const res = await fetch(`${ctx.url.origin}/api/products`);
+      const text = await res.text();
+      
+      if (!res.ok) {
+        console.error(`API responded with status ${res.status}: ${text}`);
+        return ctx.render(null);
+      }
+
+      let products: Product[];
+      try {
+        products = JSON.parse(text);
+      } catch (e) {
+        console.error("Failed to parse products:", e);
+        return ctx.render(null);
+      }
+
+      const productId = parseInt(ctx.params.id);
+      const product = products.find(p => p.id === productId);
+      
+      if (!product) {
+        console.error(`Product ${productId} not found`);
+      }
+      
+      return ctx.render(product || null);
+    } catch (error) {
+      console.error("Error in product page handler:", error);
       return ctx.render(null);
     }
-    const productId = parseInt(ctx.params.id);
-    const product = products.find(p => p.id === productId);
-    return ctx.render(product || null);
   },
 };
 
