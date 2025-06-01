@@ -33,13 +33,11 @@
     "jsxImportSource": "preact"
   },
   "deploy": {
-    "project": "30eacd9a-e3da-49ee-aef3-90647bb371ce",
+    "project": "fd271f2d-749c-44ae-a7d5-64892b330e10",
     "exclude": [
       "**/node_modules"
     ],
-    "include": [
-      "static/"
-    ],
+    "include": [],
     "entrypoint": "main.ts"
   }
 }
