@@ -1,6 +1,6 @@
 // context/RecentlyViewedContext.tsx
 import { createContext } from "preact";
-import { useContext } from "preact/hooks";
+import { useContext, useEffect } from "preact/hooks";
 import { Signal, useSignal } from "@preact/signals";
 import { Product } from "../types.ts";
 
@@ -21,8 +21,8 @@ export const useRecentlyViewed = () => useContext(RecentlyViewedContext);
 export function RecentlyViewedProvider({ children }: { children: preact.ComponentChildren }) {
   const viewedProducts = useSignal<Product[]>([]);
   
-  // Cargar productos vistos desde localStorage
-  if (typeof window !== "undefined") {
+  // Mover operaciones de localStorage a useEffect
+  useEffect(() => {
     const saved = localStorage.getItem("recentlyViewed");
     if (saved) {
       try {
@@ -31,9 +31,11 @@ export function RecentlyViewedProvider({ children }: { children: preact.Componen
         console.error("Error loading recently viewed products:", e);
       }
     }
-  }
+  }, []);
 
   const addToRecentlyViewed = (product: Product) => {
+    if (typeof window === "undefined") return; // Saltar si no está en el navegador
+    
     // Evitar duplicados
     const updated = viewedProducts.value.filter(p => p.id !== product.id);
     

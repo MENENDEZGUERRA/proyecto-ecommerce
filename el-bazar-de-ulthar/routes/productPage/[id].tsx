@@ -1,5 +1,6 @@
 // routes/productPage/[id].tsx
 import { Handlers, PageProps } from "$fresh/server.ts";
+import { useEffect } from "preact/hooks";
 import Header from "../../components/Header.tsx";
 import { Product } from "../../types.ts";
 import { asset } from "$fresh/runtime.ts";
@@ -24,6 +25,13 @@ export const handler: Handlers<Product | null> = {
 export default function ProductPage({ data }: PageProps<Product | null>) {
   const { addToRecentlyViewed } = useRecentlyViewed();
   
+  // Mover addToRecentlyViewed a useEffect
+  useEffect(() => {
+    if (data) {
+      addToRecentlyViewed(data);
+    }
+  }, [data]);
+
   if (!data) {
     return (
       <div>
@@ -32,9 +40,6 @@ export default function ProductPage({ data }: PageProps<Product | null>) {
       </div>
     );
   }
-  
-  // Añadir producto a los recientemente vistos
-  addToRecentlyViewed(data);
 
   return (
     <>
