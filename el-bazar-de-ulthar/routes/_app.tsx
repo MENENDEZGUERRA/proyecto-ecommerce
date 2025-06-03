@@ -1,8 +1,8 @@
-// routes/_app.tsx
 import { AppProps } from "$fresh/server.ts";
 import CartProvider from "../islands/CartProvider.tsx";
 import { RecentlyViewedProvider } from "../context/RecentlyViewedContext.tsx";
 import FavoritesProvider from "../islands/FavoritesProvider.tsx";
+import CommentsProvider from "../islands/CommentsProvider.tsx"; // Nuevo
 
 export default function App({ Component }: AppProps) {
   return (
@@ -23,7 +23,9 @@ export default function App({ Component }: AppProps) {
         <RecentlyViewedProvider>
           <CartProvider>
             <FavoritesProvider>
-              <Component />
+              <CommentsProvider> {/* Nuevo provider */}
+                <Component />
+              </CommentsProvider>
             </FavoritesProvider>  
           </CartProvider>
         </RecentlyViewedProvider>

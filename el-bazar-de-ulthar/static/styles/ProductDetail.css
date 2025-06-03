@@ -222,3 +222,122 @@
 .favorite-btn.is-favorite::before {
   content: "★";
 }
+
+/* Comentarios */
+.comments-section {
+  margin-top: 3rem;
+  margin-left: 3rem;
+  padding: 2rem;
+  background-color: #1D1616;
+  border-radius: 8px;
+  border: 1px solid #8E1616;
+}
+
+.comments-title {
+  font-family: 'Jolly Lodger', cursive;
+  font-size: 2rem;
+  color: #EEE;
+  margin-bottom: 1.5rem;
+  letter-spacing: 1px;
+}
+
+.comment-form {
+  margin-bottom: 2rem;
+}
+
+.comment-textarea {
+  width: 100%;
+  padding: 1rem;
+  padding-right: 0rem;
+  border-radius: 4px;
+  border: 1px solid #8E1616;
+  min-height: 100px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  resize: vertical;
+  background-color: #1D1616;
+  color: #EEEEEE;
+}
+
+.comment-textarea:focus {
+  outline: none;
+  border-color: #D84040;
+  box-shadow: 0 0 0 2px rgba(138, 43, 226, 0.2);
+}
+
+.comment-submit-btn {
+  background-color: #D84040;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.comment-submit-btn:hover {
+  background-color: #D84040;
+}
+
+.comments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+
+.comment {
+  background-color: #1D1616;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border: 1px solid #EEEEEE;
+}
+
+.comment-text {
+  margin: 0 0 1rem 0;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #EEEEEE;
+}
+
+.comment-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  color: #EEEEEE;
+}
+
+.comment-date {
+  font-style: italic;
+}
+
+.comment-delete-btn {
+  background: none;
+  border: none;
+  color: #e74c3c;
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 0.3rem 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.comment-delete-btn:hover {
+  background-color: rgba(231, 76, 60, 0.1);
+}
+
+.no-comments {
+  text-align: center;
+  color: #8E1616;
+  font-style: italic;
+  padding: 2rem;
+  background-color: 1D1616;
+  border-radius: 8px;
+  border: 1px dashed #8E1616;
+}

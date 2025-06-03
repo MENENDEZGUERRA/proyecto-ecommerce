@@ -14,9 +14,11 @@ import * as $productsPage from "./routes/productsPage.tsx";
 import * as $AddToCart from "./islands/AddToCart.tsx";
 import * as $BagPage from "./islands/BagPage.tsx";
 import * as $CartProvider from "./islands/CartProvider.tsx";
+import * as $CommentsProvider from "./islands/CommentsProvider.tsx";
 import * as $Counter from "./islands/Counter.tsx";
 import * as $FavoriteButton from "./islands/FavoriteButton.tsx";
 import * as $FavoritesProvider from "./islands/FavoritesProvider.tsx";
+import * as $ProductComments from "./islands/ProductComments.tsx";
 import * as $RecentlyViewed from "./islands/RecentlyViewed.tsx";
 import type { Manifest } from "$fresh/server.ts";
 
@@ -36,9 +38,11 @@ const manifest = {
     "./islands/AddToCart.tsx": $AddToCart,
     "./islands/BagPage.tsx": $BagPage,
     "./islands/CartProvider.tsx": $CartProvider,
+    "./islands/CommentsProvider.tsx": $CommentsProvider,
     "./islands/Counter.tsx": $Counter,
     "./islands/FavoriteButton.tsx": $FavoriteButton,
     "./islands/FavoritesProvider.tsx": $FavoritesProvider,
+    "./islands/ProductComments.tsx": $ProductComments,
     "./islands/RecentlyViewed.tsx": $RecentlyViewed,
   },
   baseUrl: import.meta.url,

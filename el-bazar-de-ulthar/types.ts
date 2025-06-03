@@ -6,3 +6,10 @@ export interface Product {
     discountPercentage: number;
     imageUrl: string;
   }
+
+  export interface Comment {
+    id: string;
+    productId: number;
+    text: string;
+    timestamp: number;
+  }
