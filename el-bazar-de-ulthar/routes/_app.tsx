@@ -2,6 +2,7 @@
 import { AppProps } from "$fresh/server.ts";
 import CartProvider from "../islands/CartProvider.tsx";
 import { RecentlyViewedProvider } from "../context/RecentlyViewedContext.tsx";
+import FavoritesProvider from "../islands/FavoritesProvider.tsx";
 
 export default function App({ Component }: AppProps) {
   return (
@@ -21,7 +22,9 @@ export default function App({ Component }: AppProps) {
       <body>
         <RecentlyViewedProvider>
           <CartProvider>
-            <Component />
+            <FavoritesProvider>
+              <Component />
+            </FavoritesProvider>  
           </CartProvider>
         </RecentlyViewedProvider>
       </body>

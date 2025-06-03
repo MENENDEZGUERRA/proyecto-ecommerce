@@ -1,7 +1,7 @@
 // context/RecentlyViewedContext.tsx
 import { createContext } from "preact";
-import { useContext, useEffect } from "preact/hooks";
-import { Signal, useSignal } from "@preact/signals";
+import { useContext, useEffect, useLayoutEffect } from "preact/hooks";
+import { Signal, signal } from "@preact/signals";
 import { Product } from "../types.ts";
 
 interface RecentlyViewedContextType {
@@ -10,43 +10,40 @@ interface RecentlyViewedContextType {
 }
 
 export const RecentlyViewedContext = createContext<RecentlyViewedContextType>({
-  viewedProducts: { value: [] } as Signal<Product[]>,
+  viewedProducts: signal([]),
   addToRecentlyViewed: () => {},
 });
 
-// Hook personalizado para acceder al contexto
 export const useRecentlyViewed = () => useContext(RecentlyViewedContext);
 
-// Proveedor del contexto
 export function RecentlyViewedProvider({ children }: { children: preact.ComponentChildren }) {
-  const viewedProducts = useSignal<Product[]>([]);
+  const viewedProducts = signal<Product[]>([]);
   
-  // Mover operaciones de localStorage a useEffect
-  useEffect(() => {
+  useLayoutEffect(() => {
     const saved = localStorage.getItem("recentlyViewed");
     if (saved) {
       try {
-        viewedProducts.value = JSON.parse(saved);
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) {
+          viewedProducts.value = parsed;
+        }
       } catch (e) {
-        console.error("Error loading recently viewed products:", e);
+        console.error("Error loading recently viewed:", e);
       }
     }
   }, []);
 
-  const addToRecentlyViewed = (product: Product) => {
-    if (typeof window === "undefined") return; // Saltar si no está en el navegador
-    
-    // Evitar duplicados
-    const updated = viewedProducts.value.filter(p => p.id !== product.id);
-    
-    // Agregar el nuevo producto al inicio
-    updated.unshift(product);
-    
-    // Mantener solo los últimos 5
-    viewedProducts.value = updated.slice(0, 5);
-    
-    // Guardar en localStorage
+  useEffect(() => {
     localStorage.setItem("recentlyViewed", JSON.stringify(viewedProducts.value));
+  }, [viewedProducts.value]);
+
+  const addToRecentlyViewed = (product: Product) => {
+    const updated = [
+      product,
+      ...viewedProducts.value.filter(p => p.id !== product.id)
+    ].slice(0, 5);
+    
+    viewedProducts.value = updated;
   };
 
   return (

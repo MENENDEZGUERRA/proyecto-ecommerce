@@ -5,9 +5,10 @@ import Header from "../../components/Header.tsx";
 import { Product } from "../../types.ts";
 import { asset } from "$fresh/runtime.ts";
 import AddToCart from "../../islands/AddToCart.tsx";
-import RecentlyViewed from "../../components/RecentlyViewed.tsx";
+import RecentlyViewed from "../../islands/RecentlyViewed.tsx"
 import { useRecentlyViewed } from "../../context/RecentlyViewedContext.tsx";
 import { products } from "../api/products.ts";
+import FavoriteButton from "../../islands/FavoriteButton.tsx";
 
 export const handler: Handlers<Product | null> = {
   async GET(_req, ctx) {
@@ -25,7 +26,6 @@ export const handler: Handlers<Product | null> = {
 export default function ProductPage({ data }: PageProps<Product | null>) {
   const { addToRecentlyViewed } = useRecentlyViewed();
   
-  // Mover addToRecentlyViewed a useEffect
   useEffect(() => {
     if (data) {
       addToRecentlyViewed(data);
@@ -56,11 +56,13 @@ export default function ProductPage({ data }: PageProps<Product | null>) {
           <div class="product-info">
             <h1 class="product-title">{data.name}</h1>
             <p class="product-description">{data.description}</p>
+            
+            {/* Botón de favoritos agregado aquí */}
+            <FavoriteButton product={data} />
+            
             <AddToCart product={data} />
           </div>
         </div>
-        
-        {/* Componente de productos recientemente vistos */}
         <RecentlyViewed />
       </main>
     </>

@@ -15,6 +15,9 @@ import * as $AddToCart from "./islands/AddToCart.tsx";
 import * as $BagPage from "./islands/BagPage.tsx";
 import * as $CartProvider from "./islands/CartProvider.tsx";
 import * as $Counter from "./islands/Counter.tsx";
+import * as $FavoriteButton from "./islands/FavoriteButton.tsx";
+import * as $FavoritesProvider from "./islands/FavoritesProvider.tsx";
+import * as $RecentlyViewed from "./islands/RecentlyViewed.tsx";
 import type { Manifest } from "$fresh/server.ts";
 
 const manifest = {
@@ -34,6 +37,9 @@ const manifest = {
     "./islands/BagPage.tsx": $BagPage,
     "./islands/CartProvider.tsx": $CartProvider,
     "./islands/Counter.tsx": $Counter,
+    "./islands/FavoriteButton.tsx": $FavoriteButton,
+    "./islands/FavoritesProvider.tsx": $FavoritesProvider,
+    "./islands/RecentlyViewed.tsx": $RecentlyViewed,
   },
   baseUrl: import.meta.url,
 } satisfies Manifest;
