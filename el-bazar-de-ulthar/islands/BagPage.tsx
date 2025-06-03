@@ -1,4 +1,3 @@
-// islands/BagPage.tsx
 import { useCart } from "../context/CartContext.tsx";
 import { Product } from "../types.ts";
 import { asset } from "$fresh/runtime.ts";
@@ -19,6 +18,9 @@ export default function BagPage() {
     const discountedPrice = item.product.price * (1 - item.product.discountPercentage / 100);
     return discountedPrice * item.quantity;
   };
+
+  const total = calculateTotal();
+  const exceedsLimit = total > 7799.922; // Verificar si excede el límite
 
   return (
     <div class="bag-page">
@@ -62,8 +64,9 @@ export default function BagPage() {
                     </button>
                     <span class="quantity-value">{item.quantity}</span>
                     <button 
-                      onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
+                      onClick={() => updateQuantity(item.product.id, Math.min(9, item.quantity + 1))} // Máximo 9 unidades
                       class="quantity-btn"
+                      disabled={item.quantity >= 9} // Deshabilitar cuando se alcanza el máximo
                     >
                       +
                     </button>
@@ -85,16 +88,24 @@ export default function BagPage() {
           <div class="bag-summary">
             <div class="summary-row">
               <span>Subtotal</span>
-              <span>{formatPrice(calculateTotal())}</span>
+              <span>{formatPrice(total)}</span>
             </div>
             <div class="summary-row">
               <span>Shipping</span>
               <span>Free</span>
             </div>
-            <div class="summary-row total">
+            <div class={`summary-row total ${exceedsLimit ? 'error' : ''}`}>
               <span>Total</span>
-              <span>{formatPrice(calculateTotal())}</span>
+              <span>
+                {exceedsLimit ? "ERROR" : formatPrice(total)}
+              </span>
             </div>
+            
+            {exceedsLimit && (
+              <div class="error-message">
+                Total exceeds Q.7799.922
+              </div>
+            )}
             
             <div class="bag-actions">
               <button 
@@ -103,7 +114,7 @@ export default function BagPage() {
               >
                 Clear Bag
               </button>
-              <button class="checkout-btn">
+              <button class="checkout-btn" disabled={exceedsLimit}>
                 Proceed to Checkout
               </button>
             </div>

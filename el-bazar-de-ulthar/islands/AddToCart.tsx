@@ -18,7 +18,6 @@ export default function AddToCart({ product }: AddToCartProps) {
     addToCart(product, quantity);
     setAdded(true);
     
-    // Resetear feedback después de 2 segundos
     setTimeout(() => setAdded(false), 2000);
   };
 
@@ -40,8 +39,9 @@ export default function AddToCart({ product }: AddToCartProps) {
         </button>
         <span class="quantity-value">{quantity}</span>
         <button 
-          onClick={() => setQuantity(q => q + 1)}
+          onClick={() => setQuantity(q => Math.min(9, q + 1))} // Máximo 9 unidades
           class="quantity-btn"
+          disabled={quantity >= 9} // Deshabilitar cuando se alcanza el máximo
         >
           +
         </button>

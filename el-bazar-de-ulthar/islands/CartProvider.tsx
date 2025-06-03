@@ -12,7 +12,6 @@ interface CartProviderProps {
 export default function CartProvider({ children }: CartProviderProps) {
   const cart = useSignal<CartItem[]>([]);
 
-  // Load cart from localStorage only on client after mount
   useEffect(() => {
     const savedCart = localStorage.getItem("cart");
     if (savedCart) {
@@ -29,15 +28,17 @@ export default function CartProvider({ children }: CartProviderProps) {
     const existingItemIndex = currentCart.findIndex(
       (item) => item.product.id === product.id
     );
+    
     if (existingItemIndex !== -1) {
+      const newQuantity = currentCart[existingItemIndex].quantity + quantity;
       currentCart[existingItemIndex] = {
         ...currentCart[existingItemIndex],
-        quantity: currentCart[existingItemIndex].quantity + quantity,
+        quantity: Math.min(9, newQuantity), // Máximo 9 unidades
       };
     } else {
       currentCart.push({
         product: { ...product },
-        quantity,
+        quantity: Math.min(9, quantity), // Máximo 9 unidades
       });
     }
     cart.value = currentCart;
@@ -49,8 +50,11 @@ export default function CartProvider({ children }: CartProviderProps) {
       removeFromCart(productId);
       return;
     }
+    
     cart.value = cart.value.map((item) =>
-      item.product.id === productId ? { ...item, quantity } : item
+      item.product.id === productId 
+        ? { ...item, quantity: Math.min(9, quantity) } // Máximo 9 unidades
+        : item
     );
     localStorage.setItem("cart", JSON.stringify(cart.value));
   };
