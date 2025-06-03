@@ -8,7 +8,7 @@ export default function BagPage() {
   
   const formatPrice = (price: number) => `Q.${price.toFixed(2)}`;
   
-  // Memoizamos el cálculo del total para evitar recálculos innecesarios
+  // Memoiza el cálculo del total
   const total = useMemo(() => {
     return cart.reduce((total, item) => {
       const discountedPrice = item.product.price * (1 - item.product.discountPercentage / 100);
@@ -16,7 +16,7 @@ export default function BagPage() {
     }, 0);
   }, [cart]);
   
-  // Memoizamos la función de cálculo individual
+  // Memorizam la función de cálculo individual
   const calculateItemTotal = useMemo(() => {
     return (item: { product: Product; quantity: number; }) => {
       const discountedPrice = item.product.price * (1 - item.product.discountPercentage / 100);
@@ -24,7 +24,7 @@ export default function BagPage() {
     };
   }, []);
 
-  const exceedsLimit = total > 7799.922; // Verificar si excede el límite
+  const exceedsLimit = total > 7799.922; // <- $999 en quetzales
 
   return (
     <div class="bag-page">
@@ -68,9 +68,9 @@ export default function BagPage() {
                     </button>
                     <span class="quantity-value">{item.quantity}</span>
                     <button 
-                      onClick={() => updateQuantity(item.product.id, Math.min(9, item.quantity + 1))} // Máximo 9 unidades
+                      onClick={() => updateQuantity(item.product.id, Math.min(9, item.quantity + 1))} 
                       class="quantity-btn"
-                      disabled={item.quantity >= 9} // Deshabilitar cuando se alcanza el máximo
+                      disabled={item.quantity >= 9} 
                     >
                       +
                     </button>

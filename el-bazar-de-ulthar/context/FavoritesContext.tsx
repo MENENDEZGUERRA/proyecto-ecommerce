@@ -4,7 +4,7 @@ import { Signal } from "@preact/signals";
 import { Product } from "../types.ts";
 
 export interface FavoritesContextType {
-  favorites: Signal<number[]>; // IDs de productos favoritos
+  favorites: Signal<number[]>; 
   toggleFavorite: (productId: number) => void;
 }
 

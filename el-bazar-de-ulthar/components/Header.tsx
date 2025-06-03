@@ -1,4 +1,3 @@
-// components/Header.tsx
 import { asset } from "$fresh/runtime.ts";
 
 export default function Header() {

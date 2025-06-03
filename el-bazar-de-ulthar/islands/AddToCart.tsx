@@ -39,9 +39,9 @@ export default function AddToCart({ product }: AddToCartProps) {
         </button>
         <span class="quantity-value">{quantity}</span>
         <button 
-          onClick={() => setQuantity(q => Math.min(9, q + 1))} // Máximo 9 unidades
+          onClick={() => setQuantity(q => Math.min(9, q + 1))} // <--- Arreglar aquí si el contador sube de 9
           class="quantity-btn"
-          disabled={quantity >= 9} // Deshabilitar cuando se alcanza el máximo
+          disabled={quantity >= 9} // Deshabilitar cuando se llega al 9
         >
           +
         </button>

@@ -23,12 +23,11 @@ export default function ProductComments({ productId }: ProductCommentsProps) {
     if (newComment.value.trim()) {
       addComment(productId, newComment.value.trim());
       newComment.value = "";
-      // Enfocamos el textarea después de enviar
       textareaRef.current?.focus();
     }
   };
 
-  // Auto-focus al textarea cuando se monta el componente
+  // Auto-focus
   useEffect(() => {
     textareaRef.current?.focus();
   }, []);

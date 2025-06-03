@@ -4,7 +4,6 @@ import ProductCard from "../components/ProductCard.tsx";
 export default function RecentlyViewed() {
   const { recentlyViewed } = useRecentlyViewed();
   
-  // If no recently viewed products, don't render anything
   if (recentlyViewed.length === 0) {
     return null;
   }

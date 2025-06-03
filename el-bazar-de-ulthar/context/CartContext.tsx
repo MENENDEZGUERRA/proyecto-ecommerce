@@ -1,4 +1,3 @@
-// context/CartContext.tsx
 import { createContext } from "preact";
 import { useContext } from "preact/hooks";
 import { Signal } from "@preact/signals";
