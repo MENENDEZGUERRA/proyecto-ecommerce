@@ -1,5 +1,6 @@
 import { useSignal } from "@preact/signals";
 import { useComments } from "../context/CommentsContext.tsx";
+import { useRef, useEffect, useMemo } from "preact/hooks";
 
 interface ProductCommentsProps {
   productId: number;
@@ -8,19 +9,29 @@ interface ProductCommentsProps {
 export default function ProductComments({ productId }: ProductCommentsProps) {
   const { comments, addComment, removeComment } = useComments();
   const newComment = useSignal("");
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  // Get comments for this product
-  const productComments = comments.value.filter(
-    comment => comment.productId === productId
-  ).sort((a, b) => b.timestamp - a.timestamp);
+  // Filtramos y memoizamos los comentarios del producto
+  const productComments = useMemo(() => {
+    return comments.value
+      .filter(comment => comment.productId === productId)
+      .sort((a, b) => b.timestamp - a.timestamp);
+  }, [comments.value, productId]);
 
   const handleSubmit = (e: Event) => {
     e.preventDefault();
     if (newComment.value.trim()) {
       addComment(productId, newComment.value.trim());
       newComment.value = "";
+      // Enfocamos el textarea después de enviar
+      textareaRef.current?.focus();
     }
   };
+
+  // Auto-focus al textarea cuando se monta el componente
+  useEffect(() => {
+    textareaRef.current?.focus();
+  }, []);
 
   return (
     <div class="comments-section">
@@ -28,6 +39,7 @@ export default function ProductComments({ productId }: ProductCommentsProps) {
       
       <form onSubmit={handleSubmit} class="comment-form">
         <textarea 
+          ref={textareaRef}
           value={newComment.value}
           onInput={(e) => newComment.value = (e.target as HTMLTextAreaElement).value}
           placeholder="Deja tu comentario sobre este objeto maldito..."

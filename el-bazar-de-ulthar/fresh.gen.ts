@@ -20,6 +20,7 @@ import * as $FavoriteButton from "./islands/FavoriteButton.tsx";
 import * as $FavoritesProvider from "./islands/FavoritesProvider.tsx";
 import * as $ProductComments from "./islands/ProductComments.tsx";
 import * as $RecentlyViewed from "./islands/RecentlyViewed.tsx";
+import * as $RecentlyViewedProvider from "./islands/RecentlyViewedProvider.tsx";
 import type { Manifest } from "$fresh/server.ts";
 
 const manifest = {
@@ -44,6 +45,7 @@ const manifest = {
     "./islands/FavoritesProvider.tsx": $FavoritesProvider,
     "./islands/ProductComments.tsx": $ProductComments,
     "./islands/RecentlyViewed.tsx": $RecentlyViewed,
+    "./islands/RecentlyViewedProvider.tsx": $RecentlyViewedProvider,
   },
   baseUrl: import.meta.url,
 } satisfies Manifest;

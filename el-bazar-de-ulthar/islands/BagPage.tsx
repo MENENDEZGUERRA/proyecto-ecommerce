@@ -1,25 +1,29 @@
 import { useCart } from "../context/CartContext.tsx";
 import { Product } from "../types.ts";
 import { asset } from "$fresh/runtime.ts";
+import { useMemo } from "preact/hooks";
 
 export default function BagPage() {
   const { cart, updateQuantity, removeFromCart, clearCart } = useCart();
   
   const formatPrice = (price: number) => `Q.${price.toFixed(2)}`;
   
-  const calculateTotal = () => {
+  // Memoizamos el cálculo del total para evitar recálculos innecesarios
+  const total = useMemo(() => {
     return cart.reduce((total, item) => {
       const discountedPrice = item.product.price * (1 - item.product.discountPercentage / 100);
       return total + (discountedPrice * item.quantity);
     }, 0);
-  };
+  }, [cart]);
   
-  const calculateItemTotal = (item: { product: Product; quantity: number; }) => {
-    const discountedPrice = item.product.price * (1 - item.product.discountPercentage / 100);
-    return discountedPrice * item.quantity;
-  };
+  // Memoizamos la función de cálculo individual
+  const calculateItemTotal = useMemo(() => {
+    return (item: { product: Product; quantity: number; }) => {
+      const discountedPrice = item.product.price * (1 - item.product.discountPercentage / 100);
+      return discountedPrice * item.quantity;
+    };
+  }, []);
 
-  const total = calculateTotal();
   const exceedsLimit = total > 7799.922; // Verificar si excede el límite
 
   return (

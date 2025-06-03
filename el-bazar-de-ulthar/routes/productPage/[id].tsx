@@ -4,11 +4,11 @@ import Header from "../../components/Header.tsx";
 import { Product } from "../../types.ts";
 import { asset } from "$fresh/runtime.ts";
 import AddToCart from "../../islands/AddToCart.tsx";
-import RecentlyViewed from "../../islands/RecentlyViewed.tsx";
 import { useRecentlyViewed } from "../../context/RecentlyViewedContext.tsx";
 import { products } from "../api/products.ts";
 import FavoriteButton from "../../islands/FavoriteButton.tsx";
-import ProductComments from "../../islands/ProductComments.tsx"; // Nuevo
+import ProductComments from "../../islands/ProductComments.tsx";
+import RecentlyViewed from "../../islands/RecentlyViewed.tsx";
 
 export const handler: Handlers<Product | null> = {
   async GET(_req, ctx) {
@@ -62,7 +62,7 @@ export default function ProductPage({ data }: PageProps<Product | null>) {
             <AddToCart product={data} />
           </div>
         </div>
-        <ProductComments productId={data.id} /> {/* Nueva sección de comentarios */}
+        <ProductComments productId={data.id} />
         <RecentlyViewed />
       </main>
     </>

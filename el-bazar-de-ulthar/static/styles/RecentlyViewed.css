@@ -1,61 +1,70 @@
-/* static/styles/RecentlyViewed.css */
-.recently-viewed {
-    margin-top: 40px;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
-    width: 100%;
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
+.recently-viewed-section {
+  margin-top: 3rem;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
 }
-  
-.section-title {
-    font-family: 'Jolly Lodger', cursive;
-    color: #D84040;
-    font-size: 1.8rem;
-    margin-bottom: 20px;
-    letter-spacing: 1px;
+
+.recently-viewed-title {
+  font-family: 'Jolly Lodger', cursive;
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 1.5rem;
+  letter-spacing: 1px;
 }
-  
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
+
+.recently-viewed-products {
+  display: flex;
+  overflow-x: auto;
+  gap: 1.5rem;
+  padding: 0.5rem 0;
 }
-  
-.product-item {
-    text-decoration: none;
-    color: #EEE;
-    transition: transform 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+
+/* Estilos para la tarjeta de producto en el carrusel */
+.recently-viewed-products .product-card {
+  min-width: 200px;
+  flex: 0 0 auto;
 }
-  
-.product-item:hover {
-    transform: translateY(-5px);
+
+.recently-viewed-products .product-card .product-image {
+  height: 150px;
+  object-fit: cover;
 }
-  
-.image-container {
-    width: 120px;
-    height: 120px;
-    overflow: hidden;
-    border-radius: 8px;
-    border: 2px solid #8E1616;
+
+.recently-viewed-products .product-title {
+  font-size: 1.1rem;
+  margin: 0.5rem 0;
 }
-  
-.product-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+
+.recently-viewed-products .price-container {
+  flex-direction: column;
+  align-items: flex-start;
 }
-  
-.product-name {
-    font-family: 'Roboto', sans-serif;
-    font-size: 0.9rem;
-    margin-top: 10px;
-    text-align: center;
-    color: #EEE;
+
+.recently-viewed-products .original-price {
+  font-size: 0.9rem;
+}
+
+.recently-viewed-products .discounted-price {
+  font-size: 1.1rem;
+}
+
+/* Scrollbar styling */
+.recently-viewed-products::-webkit-scrollbar {
+  height: 8px;
+}
+
+.recently-viewed-products::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.recently-viewed-products::-webkit-scrollbar-thumb {
+  background: #8a2be2;
+  border-radius: 10px;
+}
+
+.recently-viewed-products::-webkit-scrollbar-thumb:hover {
+  background: #7321c0;
 }
