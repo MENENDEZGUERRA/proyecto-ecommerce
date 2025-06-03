@@ -3,6 +3,9 @@
 ## Enlace al sitio en vivo:
 🌐 https://el-bazar-de-ulthar.deno.dev/productsPage
 
+## Enlace al Figma:
+🌐 https://www.figma.com/design/fzjTlVYilD67UBLXXPziDE/El-bazar-de-Ulthar?node-id=0-1&t=frnAREJMsN6agc2i-1
+
 # 🚀 Descripción del Proyecto
 Bienvenido a "El Bazar de Ulthar", una tienda en línea de objetos místicos y malditos construida con el moderno framework Fresh de Deno. Este proyecto implementa todas las funcionalidades de un e-commerce completo:
 🛒 Sistema de carrito de compras con límites
