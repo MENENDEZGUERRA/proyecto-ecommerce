@@ -1,6 +1,7 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
 import Header from "../components/Header.tsx";
 import ProductCard from "../components/ProductCard.tsx";
+import ProductSearch from "../islands/ProductSearch.tsx";
 import { Product } from "../types.ts";
 import { products } from "./api/products.ts";
 
@@ -24,6 +25,7 @@ export default function ProductsPage({ data }: PageProps<Product[] | null>) {
     <>
       <Header />
       <main class="products-page">
+        <ProductSearch products={data} />
         <div class="products-container">
           {data.map(product => (
             <ProductCard key={product.id} product={product} />

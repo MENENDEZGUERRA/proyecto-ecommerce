@@ -19,6 +19,7 @@ import * as $Counter from "./islands/Counter.tsx";
 import * as $FavoriteButton from "./islands/FavoriteButton.tsx";
 import * as $FavoritesProvider from "./islands/FavoritesProvider.tsx";
 import * as $ProductComments from "./islands/ProductComments.tsx";
+import * as $ProductSearch from "./islands/ProductSearch.tsx";
 import * as $RecentlyViewed from "./islands/RecentlyViewed.tsx";
 import * as $RecentlyViewedProvider from "./islands/RecentlyViewedProvider.tsx";
 import type { Manifest } from "$fresh/server.ts";
@@ -44,6 +45,7 @@ const manifest = {
     "./islands/FavoriteButton.tsx": $FavoriteButton,
     "./islands/FavoritesProvider.tsx": $FavoritesProvider,
     "./islands/ProductComments.tsx": $ProductComments,
+    "./islands/ProductSearch.tsx": $ProductSearch,
     "./islands/RecentlyViewed.tsx": $RecentlyViewed,
     "./islands/RecentlyViewedProvider.tsx": $RecentlyViewedProvider,
   },
